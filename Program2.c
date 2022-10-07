@@ -1,3 +1,6 @@
+// Bisection Method
+// Rate of Convergence = 1(linear)
+
 #include<stdio.h>
 #include<math.h>
 float f(float x)
