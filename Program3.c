@@ -1,5 +1,5 @@
 // Regula Falsi Method
-// Order of convergence = 
+// Order of convergence = 1.618
 
 
 #include <stdio.h>
