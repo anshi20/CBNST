@@ -1,45 +1,57 @@
 // Bisection Method
 // Rate of Convergence = 1(linear)
 
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 float f(float x)
 {
-    return (x*x*x) - (5*x) + 1;
+    return (x*x*x) - (2*x) - 5;
 }
 int main()
 {
-    printf("BISECTION   METHOD\n\n");
-    float a,b,x;
-    printf("Equation is : x^3 - 5x + 1 =0\n\n");
-    printf("Enter the value of 'a' and 'b' : ");
+    float a,b,allowed_error,root;
+    printf("Anshika Maheshwari       Sec : A\n\n");
+    printf("Equation is : x^3 - 2x - 5 = 0\n********************\n\n");
+    printf("Enter a and b : ");
     scanf("%f %f",&a,&b);
-    printf("\nEnter the allowed error : ");
-    float allowed_error;
+    while(f(a)*f(b)>0)
+    {
+        printf("Invalid values !!\nEnter a and b : ");
+        scanf("%f %f",&a,&b);
+        if(f(a)*f(b)<0)
+           break;
+    }
+    printf("\nRoot lies between : %f and %f\nProceeding.....\n\n",a,b);
+    printf("\nEnter allowed error : ");
     scanf("%f",&allowed_error);
-    if(f(a)*f(b)<0)
+    int n=20;
+    printf("\n");
+    float x,x0 = (a+b)/2;
+    int flag=0,i=1;
+    while(1)
     {
-        printf("Range is correct !!\n");
-        float x = (a+b)/2;
-        while(fabs(f(x))>allowed_error)
+        if(f(a)*f(x0)<0)
+            b=x0;
+        else
+            a=x0;
+        x = (a+b)/2;
+        if(fabs(x-x0)<allowed_error)
         {
-            if(f(a)*f(x)<0)
-            {
-                b=x;
-            }
-            else
-            {
-                a=x;
-            }
-            
-            printf("\nx=%f     f(x)=%f",x,f(x));
-            x=(a+b)/2;
+            printf("\n\nRoot found!!!!\n\n");
+            printf("\nRoot = %f       No of iterations = %d",x0,--i);
+            root=x;
+            flag=1;
+            break;
         }
-        printf("\nRoot of the equation is : %f\n",a);
+        if(flag)
+           break;
+        printf("\nIteration = %d     Root = %f",i,x);
+        i++;
+        x0=x;
     }
+    if(flag) return 0;
+        //printf("\nRoot = %f       No of iterations = %d",root,i);
     else
-    {
-        printf("Range is incorrect !!\n");
-    }
+        printf("\nNot convergent!!\n");
     return 0;
 }
